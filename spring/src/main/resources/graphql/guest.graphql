@@ -1,0 +1,14 @@
+extend type Query{
+    getGuests: [Guest]
+    getGuestById(guestId: ID!): Guest!
+}
+
+type Guest {
+    guestId: ID!
+    firstName: String!
+    lastName: String!
+    email: String!
+    phoneNumber: String
+    booking: [Booking]
+}
+

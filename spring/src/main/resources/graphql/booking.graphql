@@ -1,0 +1,26 @@
+type Query {
+    getBookings: [Booking]
+    getBookingById(bookingId: ID!): Booking
+    getBookingsByBuilding(roomBuilding: String!):[Booking]
+}
+
+type Mutation{
+    createBooking(booking: BookingInput!): Booking
+    updateBooking(bookingId: ID!, booking: BookingInput!): Booking
+    deleteBookingById(bookingId: ID!): String
+}
+
+type Booking {
+    bookingId: ID!
+    checkinDate: String!
+    checkoutDate: String!
+    room: Room
+    guest: Guest
+}
+
+input BookingInput{
+    roomId: RoomIdInput!
+    checkinDate: String!
+    checkoutDate: String!
+    guestId: Int!
+}

@@ -1,0 +1,8 @@
+
+type RoomType{
+    roomTypeId: ID!
+    roomType: String!
+    costPerDay: Int
+    rooms: [Room]
+}
+

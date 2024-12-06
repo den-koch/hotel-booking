@@ -1,0 +1,37 @@
+extend type Query {
+    getBuildingFilteredRooms(roomBuilding: String, filter: RoomFilter): [Room]
+}
+
+
+type RoomId{
+    roomNumber: Int!
+    roomBuilding: String!
+}
+
+type Room {
+    roomId: RoomId!
+    roomType: RoomType!
+    capacity: Int!
+    price: Int!
+    bookings: [Booking]
+}
+
+input RoomIdInput{
+    roomNumber: Int!
+    roomBuilding: String!
+}
+
+input RoomFilter{
+    roomCapacity: FilterField
+    roomPrice: FilterField
+    roomType: FilterField
+}
+
+input FilterField {
+    operator: String!
+    value: String!
+}
+
+
+
+

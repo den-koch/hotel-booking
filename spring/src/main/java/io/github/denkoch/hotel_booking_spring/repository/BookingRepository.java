@@ -2,13 +2,15 @@ package io.github.denkoch.hotel_booking_spring.repository;
 
 import io.github.denkoch.hotel_booking_spring.model.Booking;
 import io.github.denkoch.hotel_booking_spring.model.RoomId;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListCrudRepository;
 
 import java.sql.Date;
 import java.util.Collection;
 
-public interface BookingRepository extends ListCrudRepository<Booking, Long> {
+public interface BookingRepository extends ListCrudRepository<Booking, Long>,
+        JpaSpecificationExecutor<Booking> {
 
     @Query("SELECT b FROM Booking b JOIN b.room r " +
             "WHERE r.roomId.roomBuilding = ?1 " +

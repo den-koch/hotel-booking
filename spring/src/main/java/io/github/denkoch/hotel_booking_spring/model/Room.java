@@ -21,6 +21,7 @@ public class Room {
     @Column(name = "price")
     private Long price;
 
+//    @ManyToOne(fetch = FetchType.LAZY)
     @ManyToOne
     @JoinColumn(name = "room_type_id", referencedColumnName = "room_type_id")
     private RoomType roomType;
