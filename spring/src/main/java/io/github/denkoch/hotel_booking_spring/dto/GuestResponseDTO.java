@@ -3,10 +3,14 @@ package io.github.denkoch.hotel_booking_spring.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class GuestDTO {
+public class GuestResponseDTO {
+
+    @NotNull
+    private Long guestId;
 
     @NotBlank
     @Schema(example = "Denys")

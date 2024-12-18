@@ -1,25 +1,37 @@
 package io.github.denkoch.hotel_booking_spring.exceptions;
 
+import io.github.denkoch.hotel_booking_spring.dto.BookingDetailsDTO;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ApiResponses({@ApiResponse(responseCode = "404", description = "NotFound", content = @Content)})
     public ErrorResponse handleException(ResourceNotFoundException exception) {
         return ErrorResponse.create(exception, HttpStatus.NOT_FOUND, exception.getMessage());
     }
 
     @ExceptionHandler(ResourceAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ApiResponses({@ApiResponse(responseCode = "400", description = "BadRequest", content = @Content)})
     public ErrorResponse handleException(ResourceAlreadyExistsException exception) {
         return ErrorResponse.create(exception, HttpStatus.BAD_REQUEST, exception.getMessage());
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ApiResponses({@ApiResponse(responseCode = "409", description = "Conflict", content = @Content)})
     public ErrorResponse handleException(DataIntegrityViolationException exception) {
         return ErrorResponse.create(exception, HttpStatus.CONFLICT, "A unique constraint violation occurred");
     }
